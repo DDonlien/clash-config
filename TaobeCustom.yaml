@@ -316,6 +316,16 @@ proxy-groups:
       - 🇸🇬 新加坡地区
       - 🚀 节点选择
 
+  - name: 🎮 Epic & UE
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港地区
+      - 🇯🇵 日本地区
+      - 🇸🇬 新加坡地区
+      - 🇺🇸 美国地区
+      - 🚀 节点选择
+
   - name: GLOBAL
     type: select
     proxies:
@@ -324,10 +334,22 @@ proxy-groups:
 
 # 3. 分流规则 (Rules)
 rules:
+  # --- Epic Games & Unreal Engine ---
+  - DOMAIN-SUFFIX,epicgames.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,epicgames.dev,🎮 Epic & UE
+  - DOMAIN-SUFFIX,unrealengine.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,unrealengine.com.cn,🎮 Epic & UE
+  - DOMAIN-SUFFIX,twinmotion.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,fortnite.com,🎮 Epic & UE
+  - DOMAIN-KEYWORD,epicgames,🎮 Epic & UE
+
+  # --- Apple ---
   - DOMAIN-SUFFIX,itunes.apple.com,📺 Apple TV 服务
   - DOMAIN-SUFFIX,tv.apple.com,📺 Apple TV 服务
   - DOMAIN-SUFFIX,apple.com,🍏 Apple 通用服务
   - DOMAIN-SUFFIX,icloud.com,🍏 Apple 通用服务
+
+  # --- AI ---
   - DOMAIN-SUFFIX,openai.com,🤖 AI 工具
   - DOMAIN-SUFFIX,chatgpt.com,🤖 AI 工具
   - DOMAIN-SUFFIX,oaistatic.com,🤖 AI 工具
@@ -336,6 +358,8 @@ rules:
   - DOMAIN-SUFFIX,claude.ai,🤖 AI 工具
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI 工具
   - DOMAIN-KEYWORD,suno,🤖 AI 工具
+
+  # --- Microsoft ---
   - DOMAIN-SUFFIX,microsoftonline.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,office.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,office365.com,Ⓜ️ 微软服务
