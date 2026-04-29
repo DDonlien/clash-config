@@ -331,6 +331,15 @@ rules:
   - DOMAIN-SUFFIX,outlook.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,live.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,teams.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,microsoftstore.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,displaycatalog.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,purchase.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,tlu.dl.delivery.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,storeedgefd.dsx.mp.microsoft.com,Ⓜ️ 微软服务
+  - PROCESS-NAME,WinStore.App.exe,Ⓜ️ 微软服务
+  - PROCESS-NAME,Microsoft.StorePurchaseApp.exe,Ⓜ️ 微软服务
   - DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务
   - DOMAIN-KEYWORD,windows,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,onedrive.com,Ⓜ️ 微软服务
