@@ -126,7 +126,7 @@ proxy-groups:
       - flybit
       - spkun
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/hk-en/
     interval: 300
 
   - name: 🇯🇵 日本地区
@@ -148,7 +148,7 @@ proxy-groups:
       - flybit
       - spkun
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/jp-en/
     interval: 300
 
   - name: 🇺🇸 美国地区
@@ -170,7 +170,7 @@ proxy-groups:
       - flybit
       - spkun
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/
     interval: 300
 
   - name: 🇸🇬 新加坡地区
@@ -192,7 +192,7 @@ proxy-groups:
       - flybit
       - spkun
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/sg/
     interval: 300
 
   - name: 🇹🇼 台湾地区
@@ -214,7 +214,7 @@ proxy-groups:
       - flybit
       - spkun
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/tw/
     interval: 300
 
   - name: 🇰🇷 韩国地区
@@ -236,7 +236,7 @@ proxy-groups:
       - flybit
       - spkun
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/kr/
     interval: 300
 
   # --- 业务逻辑层 ---
