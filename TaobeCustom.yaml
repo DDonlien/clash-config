@@ -321,6 +321,13 @@ rules:
   - DOMAIN-SUFFIX,anthropic.com,🤖 AI 工具
   - DOMAIN-SUFFIX,claude.ai,🤖 AI 工具
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI 工具
+  - DOMAIN,ai.google.dev,🤖 AI 工具
+  - DOMAIN,generativelanguage.googleapis.com,🤖 AI 工具
+  - DOMAIN,aiplatform.googleapis.com,🤖 AI 工具
+  - DOMAIN,vertexai.googleapis.com,🤖 AI 工具
+  - DOMAIN-SUFFIX,googleapis.com,🤖 AI 工具
+  - DOMAIN-SUFFIX,gstatic.com,🤖 AI 工具
+  - DOMAIN-SUFFIX,googleusercontent.com,🤖 AI 工具
   - DOMAIN-KEYWORD,suno,🤖 AI 工具
 
   # --- Microsoft ---
