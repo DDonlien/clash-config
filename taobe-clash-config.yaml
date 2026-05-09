@@ -17,17 +17,17 @@ proxy-providers:
     interval: 3600
     path: ./sub1.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
-  biubiu:
-    type: http
-    url: "https://eue-l8br0hnh515w.api-biubiu.sbs/biu/subscribe?token=1afb7d7634bde00f2fe6716cfb77722c"
-    interval: 3600
-    path: ./sub2.yaml
-    health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
   flybit:
     type: http
     url: "https://rutnzgnkphxs.sealosgzg.site/api/v1/ss/8e49417b63c00fd37c6b6471ae0c29c8"
     interval: 3600
     path: ./sub3.yaml
+    health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
+  spkun:
+    type: http
+    url: "https://sub4.515666.xyz/subforwow/5c5e9c82cd6dfa44ef5b6212b9b859cc"
+    interval: 3600
+    path: ./sub4.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
 
 # 2. 策略组
@@ -39,7 +39,7 @@ proxy-groups:
       - ⚡ 全局自动
       - 📦 99 订阅
       - 📦 Flybit 订阅
-      - 📦 Biubiu 订阅
+      - 📦 SPKUN 订阅
       - 🇭🇰 香港地区
       - 🇯🇵 日本地区
       - 🇺🇸 美国地区
@@ -53,7 +53,7 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
@@ -91,18 +91,18 @@ proxy-groups:
     interval: 300
     tolerance: 50
 
-  - name: 📦 Biubiu 订阅
+  - name: 📦 SPKUN 订阅
     type: select
     proxies:
-      - ⚡ Biubiu 自动
+      - ⚡ SPKUN 自动
     use:
-      - biubiu
+      - spkun
 
-  - name: ⚡ Biubiu 自动
+  - name: ⚡ SPKUN 自动
     type: url-test
     hidden: true
     use:
-      - biubiu
+      - spkun
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
@@ -116,7 +116,7 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
 
   - name: 🇭🇰 香港-自动测速
@@ -125,9 +125,9 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/hk-en/
     interval: 300
 
   - name: 🇯🇵 日本地区
@@ -138,7 +138,7 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
 
   - name: 🇯🇵 日本-自动测速
@@ -147,9 +147,9 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/jp-en/
     interval: 300
 
   - name: 🇺🇸 美国地区
@@ -160,7 +160,7 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
 
   - name: 🇺🇸 美国-自动测速
@@ -169,9 +169,9 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/
     interval: 300
 
   - name: 🇸🇬 新加坡地区
@@ -182,7 +182,7 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
 
   - name: 🇸🇬 新加坡-自动测速
@@ -191,9 +191,9 @@ proxy-groups:
     use: 
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/sg/
     interval: 300
 
   - name: 🇹🇼 台湾地区
@@ -204,7 +204,7 @@ proxy-groups:
     use:
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
 
   - name: 🇹🇼 台湾-自动测速
@@ -213,9 +213,9 @@ proxy-groups:
     use:
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/tw/
     interval: 300
 
   - name: 🇰🇷 韩国地区
@@ -226,7 +226,7 @@ proxy-groups:
     use:
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
 
   - name: 🇰🇷 韩国-自动测速
@@ -235,9 +235,9 @@ proxy-groups:
     use:
       - sub99
       - flybit
-      - biubiu
+      - spkun
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
-    url: http://www.gstatic.com/generate_204
+    url: https://www.netflix.com/kr/
     interval: 300
 
   # --- 业务逻辑层 ---
@@ -341,6 +341,13 @@ rules:
   - DOMAIN-SUFFIX,anthropic.com,🤖 AI 工具
   - DOMAIN-SUFFIX,claude.ai,🤖 AI 工具
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI 工具
+  - DOMAIN,ai.google.dev,🤖 AI 工具
+  - DOMAIN,generativelanguage.googleapis.com,🤖 AI 工具
+  - DOMAIN,aiplatform.googleapis.com,🤖 AI 工具
+  - DOMAIN,vertexai.googleapis.com,🤖 AI 工具
+  - DOMAIN-SUFFIX,googleapis.com,🤖 AI 工具
+  - DOMAIN-SUFFIX,gstatic.com,🤖 AI 工具
+  - DOMAIN-SUFFIX,googleusercontent.com,🤖 AI 工具
   - DOMAIN-KEYWORD,suno,🤖 AI 工具
 
   # --- Microsoft ---
@@ -351,6 +358,15 @@ rules:
   - DOMAIN-SUFFIX,outlook.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,live.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,teams.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,microsoftstore.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,displaycatalog.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,purchase.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,tlu.dl.delivery.mp.microsoft.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,storeedgefd.dsx.mp.microsoft.com,Ⓜ️ 微软服务
+  - PROCESS-NAME,WinStore.App.exe,Ⓜ️ 微软服务
+  - PROCESS-NAME,Microsoft.StorePurchaseApp.exe,Ⓜ️ 微软服务
   - DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务
   - DOMAIN-KEYWORD,windows,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,onedrive.com,Ⓜ️ 微软服务
