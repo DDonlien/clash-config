@@ -12,7 +12,7 @@ external-controller: '127.0.0.1:9090'
 proxy-providers:
   sub99:
     type: http
-    url: "https://rutnzgnkphxs.sealosgzg.site/api/v1/ss/8e49417b63c00fd37c6b6471ae0c29c8"
+    url: "https://ycexbktkoctx.sealosgzg.site/api/sub/3013ec5f494f77a2697b4ae5f9c335d4"
     interval: 3600
     path: ./sub1.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
