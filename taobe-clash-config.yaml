@@ -16,12 +16,14 @@ proxy-providers:
     interval: 3600
     path: ./sub1.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
+
   flybit:
     type: http
-    url: "https://rutnzgnkphxs.sealosgzg.site/api/v1/ss/8e49417b63c00fd37c6b6471ae0c29c8"
+    url: "https://s.fb.22na.cn/api/v1/ss/8e49417b63c00fd37c6b6471ae0c29c8"
     interval: 3600
     path: ./sub3.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
+
   spkun:
     type: http
     url: "https://sub4.515666.xyz/subforwow/5c5e9c82cd6dfa44ef5b6212b9b859cc"
