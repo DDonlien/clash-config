@@ -10,9 +10,9 @@ external-controller: '127.0.0.1:9090'
 
 # 1. 订阅资源
 proxy-providers:
-  sub99:
+  biubiu:
     type: http
-    url: "https://ycexbktkoctx.sealosgzg.site/api/sub/3013ec5f494f77a2697b4ae5f9c335d4"
+    url: "https://eue-l8br0hnh515w.api-biubiu.sbs/biu/subscribe?token=1afb7d7634bde00f2fe6716cfb77722c"
     interval: 3600
     path: ./sub1.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
