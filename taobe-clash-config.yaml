@@ -37,9 +37,10 @@ proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
+      - ♻️ 订阅优先可用
       - ⚡ 全局自动
-      - 📦 99 订阅
       - 📦 Flybit 订阅
+      - 📦 Biubiu 订阅
       - 📦 SPKUN 订阅
       - 🇭🇰 香港地区
       - 🇯🇵 日本地区
@@ -52,34 +53,29 @@ proxy-groups:
   - name: ⚡ 全局自动
     type: url-test
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     url: http://www.gstatic.com/generate_204
     expected-status: 204
     interval: 300
+    timeout: 500
     tolerance: 50
+    lazy: false
+
+  # --- 手动订阅优先级：按 Flybit -> Biubiu -> SPKUN，超过 500ms 或不可用则降级 ---
+  - name: ♻️ 订阅优先可用
+    type: fallback
+    proxies:
+      - ⚡ Flybit 自动
+      - ⚡ Biubiu 自动
+      - ⚡ SPKUN 自动
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
     lazy: false
 
   # --- 按订阅分组：组内可手动选节点，也可先走该订阅自动测速 ---
-  - name: 📦 99 订阅
-    type: select
-    proxies:
-      - ⚡ 99 自动
-    use:
-      - sub99
-
-  - name: ⚡ 99 自动
-    type: url-test
-    hidden: true
-    use:
-      - sub99
-    url: http://www.gstatic.com/generate_204
-    expected-status: 204
-    interval: 300
-    tolerance: 50
-    lazy: false
-
   - name: 📦 Flybit 订阅
     type: select
     proxies:
@@ -95,6 +91,26 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     expected-status: 204
     interval: 300
+    timeout: 500
+    tolerance: 50
+    lazy: false
+
+  - name: 📦 Biubiu 订阅
+    type: select
+    proxies:
+      - ⚡ Biubiu 自动
+    use:
+      - biubiu
+
+  - name: ⚡ Biubiu 自动
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    url: http://www.gstatic.com/generate_204
+    expected-status: 204
+    interval: 300
+    timeout: 500
     tolerance: 50
     lazy: false
 
@@ -113,6 +129,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     expected-status: 204
     interval: 300
+    timeout: 500
     tolerance: 50
     lazy: false
 
@@ -120,11 +137,12 @@ proxy-groups:
   - name: 🇭🇰 香港地区
     type: select
     proxies: 
+      - 🇭🇰 香港-订阅优先
       - 🇭🇰 香港-自动测速
       - DIRECT
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
 
@@ -132,8 +150,8 @@ proxy-groups:
     type: url-test
     hidden: true
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
     url: https://www.netflix.com/hk-en/
@@ -141,14 +159,60 @@ proxy-groups:
     tolerance: 50
     lazy: false
 
+  - name: 🇭🇰 香港-订阅优先
+    type: fallback
+    hidden: true
+    proxies:
+      - ⚡ Flybit 香港
+      - ⚡ Biubiu 香港
+      - ⚡ SPKUN 香港
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    lazy: false
+
+  - name: ⚡ Flybit 香港
+    type: url-test
+    hidden: true
+    use:
+      - flybit
+    filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ SPKUN 香港
+    type: url-test
+    hidden: true
+    use:
+      - spkun
+    filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ Biubiu 香港
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
   - name: 🇯🇵 日本地区
     type: select
     proxies: 
+      - 🇯🇵 日本-订阅优先
       - 🇯🇵 日本-自动测速
       - DIRECT
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
 
@@ -156,8 +220,8 @@ proxy-groups:
     type: url-test
     hidden: true
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
     url: https://www.netflix.com/jp-en/
@@ -165,14 +229,60 @@ proxy-groups:
     tolerance: 50
     lazy: false
 
+  - name: 🇯🇵 日本-订阅优先
+    type: fallback
+    hidden: true
+    proxies:
+      - ⚡ Flybit 日本
+      - ⚡ Biubiu 日本
+      - ⚡ SPKUN 日本
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    lazy: false
+
+  - name: ⚡ Flybit 日本
+    type: url-test
+    hidden: true
+    use:
+      - flybit
+    filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ SPKUN 日本
+    type: url-test
+    hidden: true
+    use:
+      - spkun
+    filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ Biubiu 日本
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
   - name: 🇺🇸 美国地区
     type: select
     proxies: 
+      - 🇺🇸 美国-订阅优先
       - 🇺🇸 美国-自动测速
       - DIRECT
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
 
@@ -180,8 +290,8 @@ proxy-groups:
     type: url-test
     hidden: true
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
     url: https://www.netflix.com/
@@ -189,14 +299,60 @@ proxy-groups:
     tolerance: 50
     lazy: false
 
+  - name: 🇺🇸 美国-订阅优先
+    type: fallback
+    hidden: true
+    proxies:
+      - ⚡ Flybit 美国
+      - ⚡ Biubiu 美国
+      - ⚡ SPKUN 美国
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    lazy: false
+
+  - name: ⚡ Flybit 美国
+    type: url-test
+    hidden: true
+    use:
+      - flybit
+    filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ SPKUN 美国
+    type: url-test
+    hidden: true
+    use:
+      - spkun
+    filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ Biubiu 美国
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
   - name: 🇸🇬 新加坡地区
     type: select
     proxies: 
+      - 🇸🇬 新加坡-订阅优先
       - 🇸🇬 新加坡-自动测速
       - DIRECT
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
 
@@ -204,8 +360,8 @@ proxy-groups:
     type: url-test
     hidden: true
     use: 
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
     url: https://www.netflix.com/sg/
@@ -213,14 +369,60 @@ proxy-groups:
     tolerance: 50
     lazy: false
 
+  - name: 🇸🇬 新加坡-订阅优先
+    type: fallback
+    hidden: true
+    proxies:
+      - ⚡ Flybit 新加坡
+      - ⚡ Biubiu 新加坡
+      - ⚡ SPKUN 新加坡
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    lazy: false
+
+  - name: ⚡ Flybit 新加坡
+    type: url-test
+    hidden: true
+    use:
+      - flybit
+    filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ SPKUN 新加坡
+    type: url-test
+    hidden: true
+    use:
+      - spkun
+    filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ Biubiu 新加坡
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
   - name: 🇹🇼 台湾地区
     type: select
     proxies:
+      - 🇹🇼 台湾-订阅优先
       - 🇹🇼 台湾-自动测速
       - DIRECT
     use:
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
 
@@ -228,8 +430,8 @@ proxy-groups:
     type: url-test
     hidden: true
     use:
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
     url: https://www.netflix.com/tw/
@@ -237,14 +439,60 @@ proxy-groups:
     tolerance: 50
     lazy: false
 
+  - name: 🇹🇼 台湾-订阅优先
+    type: fallback
+    hidden: true
+    proxies:
+      - ⚡ Flybit 台湾
+      - ⚡ Biubiu 台湾
+      - ⚡ SPKUN 台湾
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    lazy: false
+
+  - name: ⚡ Flybit 台湾
+    type: url-test
+    hidden: true
+    use:
+      - flybit
+    filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ SPKUN 台湾
+    type: url-test
+    hidden: true
+    use:
+      - spkun
+    filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ Biubiu 台湾
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
   - name: 🇰🇷 韩国地区
     type: select
     proxies:
+      - 🇰🇷 韩国-订阅优先
       - 🇰🇷 韩国-自动测速
       - DIRECT
     use:
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
 
@@ -252,14 +500,59 @@ proxy-groups:
     type: url-test
     hidden: true
     use:
-      - sub99
       - flybit
+      - biubiu
       - spkun
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
     url: https://www.netflix.com/kr/
     interval: 300
     tolerance: 50
     lazy: false
+
+  - name: 🇰🇷 韩国-订阅优先
+    type: fallback
+    hidden: true
+    proxies:
+      - ⚡ Flybit 韩国
+      - ⚡ Biubiu 韩国
+      - ⚡ SPKUN 韩国
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    lazy: false
+
+  - name: ⚡ Flybit 韩国
+    type: url-test
+    hidden: true
+    use:
+      - flybit
+    filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ SPKUN 韩国
+    type: url-test
+    hidden: true
+    use:
+      - spkun
+    filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
+
+  - name: ⚡ Biubiu 韩国
+    type: url-test
+    hidden: true
+    use:
+      - biubiu
+    filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    timeout: 500
+    tolerance: 50
 
   # --- 业务逻辑层 ---
   - name: 🤖 AI 工具
