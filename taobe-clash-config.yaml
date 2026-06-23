@@ -768,6 +768,17 @@ proxy-groups:
       - 🇺🇸 美国地区
       - 🚀 节点选择
 
+  # --- Perforce（P4 协议 + Web 生态，默认走国内 DIRECT）---
+  - name: 📦 Perforce
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港地区
+      - 🇯🇵 日本地区
+      - 🇸🇬 新加坡地区
+      - 🇺🇸 美国地区
+      - 🚀 节点选择
+
   - name: GLOBAL
     type: select
     proxies:
@@ -776,13 +787,36 @@ proxy-groups:
 
 # 3. 分流规则 (Rules)
 rules:
+  # --- Perforce（P4 协议 + 官方 Web/CDN/Swarm/Helix 等）---
+  # 服务器 IP（迷宫球 / 跃入迷城，端口 1666 省掉，clash 的 IP-CIDR 不区分端口）
+  - IP-CIDR,8.153.73.174/32,📦 Perforce
+  - IP-CIDR,47.116.5.200/32,📦 Perforce
+  # 官方域名（覆盖 *.perforce.com、swarm、helix、ftp 二进制 CDN 等所有子域）
+  - DOMAIN-SUFFIX,perforce.com,📦 Perforce
+  - DOMAIN-KEYWORD,perforce,📦 Perforce
+
   # --- Epic Games & Unreal Engine ---
+  # Epic 启动器 & 在线服务
   - DOMAIN-SUFFIX,epicgames.com,🎮 Epic & UE
   - DOMAIN-SUFFIX,epicgames.dev,🎮 Epic & UE
+  - DOMAIN-SUFFIX,ol.epicgames.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,launcher.ol.epicgames.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,devops.epicgames.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,datarouter.ol.epicgames.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,etw.epicgames.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,capture-services.epicgames.com,🎮 Epic & UE
+  # Unreal Engine 主站 & CDN & 文档
   - DOMAIN-SUFFIX,unrealengine.com,🎮 Epic & UE
   - DOMAIN-SUFFIX,unrealengine.com.cn,🎮 Epic & UE
+  - DOMAIN-SUFFIX,cdn.unrealengine.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,udn.unrealengine.com,🎮 Epic & UE
+  # 周边生态
   - DOMAIN-SUFFIX,twinmotion.com,🎮 Epic & UE
   - DOMAIN-SUFFIX,fortnite.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,fab.com,🎮 Epic & UE
+  - DOMAIN-SUFFIX,quixel.com,🎮 Epic & UE
+  # 关键词兜底（unrealengine 主域未来新增子域、Epic 内部服务等）
+  - DOMAIN-KEYWORD,unrealengine,🎮 Epic & UE
   - DOMAIN-KEYWORD,epicgames,🎮 Epic & UE
 
   # --- Steam ---
